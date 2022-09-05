@@ -1,6 +1,6 @@
 const supertest = require("supertest");
 
-const createApp = require("./app.js.js");
+const createApp = require("./app.js");
 
 const app = createApp();
 
@@ -10,7 +10,8 @@ test("GET /", async () => {
   const response = await request
     .get("/")
     .expect(200)
-    .expect("Content-Type", "application/json");
+    .expect("Content-Type", "text/html");
 
-  expect(response.body).toEqual({ location: "Earth" });
+    expect(response.text).toEqual("Welcome to the World Wide Web!");
+  
 });
