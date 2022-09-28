@@ -6,51 +6,74 @@ import app from "./app";
 
 const request = supertest(app);
 
-test("GET /planets", async () => {
-    const planets = [
-        {
-            id: 1,
-            name: "Mercury",
-            description: null,
-            diameter: 1234,
-            moons: 12,
-            createdAt: "2022-09-28T17:23:31.541Z",
-            updatedAt: "2022-09-28T17:22:54.914Z",
-        },
-        {
-            id: 2,
-            name: "Venus",
-            description: null,
-            diameter: 5678,
-            moons: 2,
-            createdAt: "2022-09-28T17:23:31.540Z",
-            updatedAt: "2022-09-28T17:22:51.746Z",
-        },
-    ];
+describe("GET /planets", () => {
+    test("Valid request", async () => {
+        const planets = [
+            {
+                id: 1,
+                name: "Mercury",
+                description: null,
+                diameter: 1234,
+                moons: 12,
+                createdAt: "2022-09-28T17:23:31.541Z",
+                updatedAt: "2022-09-28T17:22:54.914Z",
+            },
+            {
+                id: 2,
+                name: "Venus",
+                description: null,
+                diameter: 5678,
+                moons: 2,
+                createdAt: "2022-09-28T17:23:31.540Z",
+                updatedAt: "2022-09-28T17:22:51.746Z",
+            },
+        ];
 
-    // @ts-ignore
-    prismaMock.planet.findMany.mockResolvedValue(planets);
+        // @ts-ignore
+        prismaMock.planet.findMany.mockResolvedValue(planets);
 
-    const response = await request
-        .get("/planets")
-        .expect(200)
-        .expect("Content-Type", /application\/json/);
+        const response = await request
+            .get("/planets")
+            .expect(200)
+            .expect("Content-Type", /application\/json/);
 
-    expect(response.body).toEqual(planets);
+        expect(response.body).toEqual(planets);
+    });
 });
 
-test("POST /planets", async () => {
-    const planet = {
-        name: "Mercury",
-        diameter: 1234,
-        moons: 12,
-    };
+describe("POST /planets", () => {
+    test("Valid request", async () => {
+        const planet = {
+            name: "Mercury",
+            diameter: 1234,
+            moons: 12,
+        };
 
-    const response = await request
-        .post("/planets")
-        .send(planet)
-        .expect(201)
-        .expect("Content-Type", /application\/json/);
+        const response = await request
+            .post("/planets")
+            .send(planet)
+            .expect(201)
+            .expect("Content-Type", /application\/json/);
 
-    expect(response.body).toEqual(planet);
+        expect(response.body).toEqual(planet);
+    });
+
+    test("Invalid request", async () => {
+        const planet = {
+            diameter: 1234,
+            moons: 12,
+        };
+
+        const response = await request
+            .post("/planets")
+            .send(planet)
+            .expect(422)
+            .expect("Content-Type", /application\/json/);
+
+        expect(response.body).toEqual({
+            errors: {
+                body: expect.any(Array)
+            }
+        });
+    });
 });
