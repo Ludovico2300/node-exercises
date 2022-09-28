@@ -1,14 +1,22 @@
 import express from "express";
 import "express-async-errors";
+
 import prisma from "./lib/prisma/client";
 
 const app = express();
 
-app.get("/manga_facts", async (request, response) => {
-   const manga = await prisma.manga.findMany();
+app.use(express.json());
 
-   response.json(manga);
+app.get("/planets", async (request, response) => {
+    const planets = await prisma.planet.findMany();
+
+    response.json(planets);
 });
 
+app.post("/planets", async (request, response) => {
+    const planet = request.body;
+
+    response.status(201).json(planet);
+});
 
 export default app;

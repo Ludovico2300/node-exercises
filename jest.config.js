@@ -4,5 +4,4 @@ module.exports = {
     verbose: true,
     clearMocks: true,
     setupFilesAfterEnv: ["./src/lib/prisma/client.mock.ts"]
-
-}
+};
