@@ -14,8 +14,8 @@ test("GET /planets", async () => {
             description: null,
             diameter: 1234,
             moons: 12,
-            createdAt: "2022-05-15T11:36:11.162Z",
-            updatedAt: "2022-05-15T11:35:57.603Z",
+            createdAt: "2022-09-28T17:23:31.541Z",
+            updatedAt: "2022-09-28T17:22:54.914Z",
         },
         {
             id: 2,
@@ -23,8 +23,8 @@ test("GET /planets", async () => {
             description: null,
             diameter: 5678,
             moons: 2,
-            createdAt: "2022-05-15T11:36:41.513Z",
-            updatedAt: "2022-05-15T11:36:30.143Z",
+            createdAt: "2022-09-28T17:23:31.540Z",
+            updatedAt: "2022-09-28T17:22:51.746Z",
         },
     ];
 
