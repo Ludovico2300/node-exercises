@@ -15,8 +15,8 @@ describe("GET /planets", () => {
                 description: null,
                 diameter: 1234,
                 moons: 12,
-                createdAt: "2022-09-28T17:23:31.541Z",
-                updatedAt: "2022-09-28T17:22:54.914Z",
+                createdAt: "2022-05-15T11:36:11.162Z",
+                updatedAt: "2022-05-15T11:35:57.603Z",
             },
             {
                 id: 2,
@@ -24,8 +24,8 @@ describe("GET /planets", () => {
                 description: null,
                 diameter: 5678,
                 moons: 2,
-                createdAt: "2022-09-28T17:23:31.540Z",
-                updatedAt: "2022-09-28T17:22:51.746Z",
+                createdAt: "2022-05-15T11:36:41.513Z",
+                updatedAt: "2022-05-15T11:36:30.143Z",
             },
         ];
 
@@ -35,7 +35,8 @@ describe("GET /planets", () => {
         const response = await request
             .get("/planets")
             .expect(200)
-            .expect("Content-Type", /application\/json/);
+            .expect("Content-Type", /application\/json/)
+            .expect("Access-Control-Allow-Origin", "http://localhost:8080");
 
         expect(response.body).toEqual(planets);
     });
@@ -49,8 +50,8 @@ describe("GET /planet/:id", () => {
             description: null,
             diameter: 1234,
             moons: 12,
-            createdAt: "2022-09-28T17:23:31.541Z",
-            updatedAt: "2022-09-28T17:22:54.914Z",
+            createdAt: "2022-05-15T11:36:11.162Z",
+            updatedAt: "2022-05-15T11:35:57.603Z",
         };
 
         // @ts-ignore
@@ -94,8 +95,8 @@ describe("POST /planets", () => {
             description: null,
             diameter: 1234,
             moons: 12,
-            createdAt: "2022-09-28T17:23:31.541Z",
-            updatedAt: "2022-09-28T17:22:54.914Z",
+            createdAt: "2022-05-15T14:51:23.372Z",
+            updatedAt: "2022-05-15T14:51:23.372Z",
         };
 
         // @ts-ignore
@@ -109,7 +110,8 @@ describe("POST /planets", () => {
                 moons: 12,
             })
             .expect(201)
-            .expect("Content-Type", /application\/json/);
+            .expect("Content-Type", /application\/json/)
+            .expect("Access-Control-Allow-Origin", "http://localhost:8080");
 
         expect(response.body).toEqual(planet);
     });
@@ -142,8 +144,8 @@ describe("PUT /planets/:id", () => {
             description: "Lovely planet",
             diameter: 1234,
             moons: 12,
-            createdAt: "2022-09-28T17:23:31.541Z",
-            updatedAt: "2022-09-28T17:22:54.914Z",
+            createdAt: "2022-05-15T14:51:23.372Z",
+            updatedAt: "2022-05-15T14:51:23.372Z",
         };
 
         // @ts-ignore
@@ -158,7 +160,8 @@ describe("PUT /planets/:id", () => {
                 moons: 12,
             })
             .expect(200)
-            .expect("Content-Type", /application\/json/);
+            .expect("Content-Type", /application\/json/)
+            .expect("Access-Control-Allow-Origin", "http://localhost:8080");
 
         expect(response.body).toEqual(planet);
     });
@@ -220,7 +223,8 @@ describe("DELETE /planet/:id", () => {
     test("Valid request", async () => {
         const response = await request
             .delete("/planets/1")
-            .expect(204);
+            .expect(204)
+            .expect("Access-Control-Allow-Origin", "http://localhost:8080");
 
         expect(response.text).toEqual("");
     });
